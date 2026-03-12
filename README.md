@@ -7,6 +7,7 @@ A simple English-Vietnamese dictionary written in Java.
 - Search word
 - Add new word
 - Delete word
+
 *Other:
 -Authentication
 -Authorization 
