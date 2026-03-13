@@ -9,8 +9,8 @@ A simple English-Vietnamese dictionary written in Java.
 - Delete word
 
 *Other:
--Authentication
--Authorization 
+- Authentication
+- Authorization 
 
 ## Technologies
 - Java 
