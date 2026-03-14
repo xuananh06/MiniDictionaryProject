@@ -13,8 +13,10 @@
 - Add new word
 - Delete word
 
-*Version 2 
+!Version 1.1 (14/3/26): 
 - Correcting data entry errors in choice function
+
+*Version 2 
 - Authentication
 - Authorization 
 
