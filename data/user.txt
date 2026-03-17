@@ -1,0 +1,2 @@
+admin:123:admin
+xa:123:user
