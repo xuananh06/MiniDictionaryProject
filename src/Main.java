@@ -69,26 +69,10 @@ public class Main {
                     authController.login(username, password);
                     break;
                 }
-
-                case "2":
-                    {
-                    System.out.print("Enter word: ");
-                    String word = scanner.nextLine();
-                    System.out.print("Enter meaning: ");
-                    String meaning = scanner.nextLine();
-                    dictionaryController.addWord(word, meaning);
-                    break;
-                }
-                case "3":
-                    {
-                    System.out.print("Enter word: ");
-                    String search = scanner.nextLine();
-                    dictionaryController.searchWord(search);
-                    break;
-                }
-
+                
+                case "2": dictionaryController.execute("addWord"); break;
+                case "3": dictionaryController.execute("searchWord"); break;
                 case "4": authController.logout(); break;
-
                 case "0" : running = false; break;
                 
                 default  : System.out.println("Invalid choice!"); break;    

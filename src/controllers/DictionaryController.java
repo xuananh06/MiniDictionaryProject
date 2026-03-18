@@ -1,24 +1,40 @@
 package controllers;
 
-import services.DictionaryService;
+import annotations.AuthN;
+import annotations.AuthZ;
+import core.BaseController;
+import services.IDictionaryService;
 
-public class DictionaryController {
+import java.util.Scanner;
 
-    private DictionaryService service;
+public class DictionaryController extends BaseController {
 
-    public DictionaryController(DictionaryService service) {
-        this.service = service;
+    Scanner scanner = new Scanner(System.in);
+
+    private final IDictionaryService dictionaryService;
+
+    public DictionaryController(IDictionaryService dictionaryService) {
+        this.dictionaryService = dictionaryService;
     }
 
-    public void addWord(String word, String meaning) {
-
-        service.addWord(word, meaning);
+    @AuthN
+    @AuthZ(roles = "admin|user")
+    public void addWord() {
+        System.out.print("Enter word: ");
+        String word = scanner.nextLine();
+        System.out.print("Enter meaning: ");
+        String meaning = scanner.nextLine();
+        dictionaryService.addWord(word, meaning);
         System.out.println("Word added successfully!");
     }
 
-    public void searchWord(String word) {
+    @AuthN
+    @AuthZ(roles = "admin|user")
+    public void searchWord() {
+        System.out.print("Enter word: ");
+        String word = scanner.nextLine();
 
-        String meaning = service.searchWord(word);
+        String meaning = dictionaryService.searchWord(word);
 
         if (meaning != null) {
             System.out.println("Meaning: " + meaning);
