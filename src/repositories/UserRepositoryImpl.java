@@ -17,7 +17,7 @@ import java.util.Set;
  user.txt format: username:password:role1,role2
  */
 public class UserRepositoryImpl implements IUserRepository {
-    private static final String FILE_PATH = "data/users.txt";
+    private static final String FILE_PATH = "data/user.txt";
     private final List<User> users = new ArrayList<>();
 
     public UserRepositoryImpl() {

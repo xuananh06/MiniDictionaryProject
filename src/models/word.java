@@ -1,11 +1,11 @@
 package models;
 
-public class word {
+public class Word {
 
     private String word;
     private String meaning;
 
-    public word(String word, String meaning) {
+    public Word(String word, String meaning) {
         this.word = word;
         this.meaning = meaning;
     }

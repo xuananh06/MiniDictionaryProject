@@ -1,9 +1,13 @@
 package services;
 
 import repositories.IUserRepository;
+
+import java.util.Optional;
+
+import core.Session;
 import models.User;
 
-public class AuthService {
+public class AuthService implements IAuthService {
 
     private IUserRepository userRepository;
 
@@ -11,10 +15,18 @@ public class AuthService {
         this.userRepository = userRepository;
     }
 
-    public User login(String username, String password){
+    @Override
+    public boolean login(String username, String password) {
+        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+        if (user.isPresent()) {
+            Session.login(user.get());
+            return true;
+        }
+        return false;
+    }
 
-        return userRepository
-                .findByUsernameAndPassword(username,password)
-                .orElse(null);
+    @Override
+    public void logout() {
+        Session.logout();
     }
 }

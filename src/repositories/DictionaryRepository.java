@@ -1,14 +1,15 @@
 package repositories;
 
-import models.word;
+import models.Word;
 
 import java.io.*;
 
-public class DictionaryRepository {
+public class DictionaryRepository implements IDictionaryRepository {
 
     private final String FILE_PATH = "data/dictionary.txt";
 
-    public void addWord(word word) {
+    @Override
+    public void addWord(Word word) {
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
 
@@ -20,6 +21,7 @@ public class DictionaryRepository {
         }
     }
 
+    @Override
     public String findWord(String inputWord) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {

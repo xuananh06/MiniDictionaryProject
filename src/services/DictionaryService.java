@@ -1,9 +1,9 @@
 package services;
 
-import models.word;
+import models.Word;
 import repositories.DictionaryRepository;
 
-public class DictionaryService {
+public class DictionaryService implements IDictionaryService {
 
     private DictionaryRepository repository;
 
@@ -11,12 +11,14 @@ public class DictionaryService {
         this.repository = repository;
     }
 
+    @Override
     public void addWord(String word, String meaning) {
 
-        word newWord = new word(word, meaning);
+        Word newWord = new Word(word, meaning);
         repository.addWord(newWord);
     }
 
+    @Override
     public String searchWord(String word) {
 
         return repository.findWord(word);
