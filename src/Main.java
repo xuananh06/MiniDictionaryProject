@@ -1,5 +1,6 @@
 import controllers.AuthController;
 import controllers.DictionaryController;
+import core.DIManager;
 import core.Session;
 import repositories.IDictionaryRepository;
 import repositories.DictionaryRepository;
@@ -13,16 +14,25 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        //DI wiring 
+        DIManager di = new DIManager();
 
-        // AUTH
-        IUserRepository userRepo = new UserRepositoryImpl();
-        AuthService authService = new AuthService(userRepo);
-        AuthController authController = new AuthController(authService);
+        // DAL — manual: no dependencies
+        di.register(IUserRepository.class, new UserRepositoryImpl());
+        di.register(IDictionaryRepository.class, new DictionaryRepository());
 
-        // DICTIONARY
-        IDictionaryRepository dictionaryRepo = new DictionaryRepository();
-        DictionaryService dictionaryService = new DictionaryService(dictionaryRepo);
-        DictionaryController dictionaryController = new DictionaryController(dictionaryService);
+        // Services — auto-wire by class
+        di.register(AuthService.class);
+        di.register(DictionaryService.class);
+    
+
+        // Controllers — package scan (or register explicitly, e.g. di.register(AuthController.class))
+        di.register("controllers.*");
+        
+        
+        AuthController authController = di.resolve(AuthController.class);
+        DictionaryController    dictionaryController    = di.resolve(DictionaryController.class);
+       
 
 
 
