@@ -1,13 +1,14 @@
 package services;
 
 import models.Word;
-import repositories.DictionaryRepository;
+
+import repositories.IDictionaryRepository;
 
 public class DictionaryService implements IDictionaryService {
 
-    private DictionaryRepository repository;
+    private IDictionaryRepository repository;
 
-    public DictionaryService(DictionaryRepository repository) {
+    public DictionaryService(IDictionaryRepository repository) {
         this.repository = repository;
     }
 

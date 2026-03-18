@@ -1,6 +1,7 @@
 import controllers.AuthController;
 import controllers.DictionaryController;
 import core.Session;
+import repositories.IDictionaryRepository;
 import repositories.DictionaryRepository;
 import repositories.IUserRepository;
 import repositories.UserRepositoryImpl;
@@ -19,9 +20,9 @@ public class Main {
         AuthController authController = new AuthController(authService);
 
         // DICTIONARY
-        DictionaryRepository repository = new DictionaryRepository();
-        DictionaryService service = new DictionaryService(repository);
-        DictionaryController controller = new DictionaryController(service);
+        IDictionaryRepository dictionaryRepo = new DictionaryRepository();
+        DictionaryService dictionaryService = new DictionaryService(dictionaryRepo);
+        DictionaryController dictionaryController = new DictionaryController(dictionaryService);
 
 
 
@@ -65,14 +66,14 @@ public class Main {
                     String word = scanner.nextLine();
                     System.out.print("Enter meaning: ");
                     String meaning = scanner.nextLine();
-                    controller.addWord(word, meaning);
+                    dictionaryController.addWord(word, meaning);
                     break;
                 }
                 case "3":
                     {
                     System.out.print("Enter word: ");
                     String search = scanner.nextLine();
-                    controller.searchWord(search);
+                    dictionaryController.searchWord(search);
                     break;
                 }
 
