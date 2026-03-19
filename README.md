@@ -1,24 +1,31 @@
 # Mini Java Dictionary
 
-- Java-based Mini English-Vietnamese Dictionary.
+A CLI-based English-Vietnamese dictionary built with Java, featuring authentication and CRUD operations.
 
 ## Technologies
-- Java 
+- Java
 - OOP
-- Apply design pattern: MVC - DAO - DI
+
+## Architecture & Design Patterns
+- MVC layered architecture
+- DAO/Repository Pattern
+- DI & IoC
+- Annotation-based security
+- RBAC
 
 ## Features
-*Version 1 (10/3/26)
+
+### Version 1.0 (2026-03-10)
 - Search word
 - Add new word
 - Delete word
 
-!Version 1.1 (14/3/26): 
-- Correcting data entry errors in choice function
+### Version 1.1 (2026-03-14)
+- Fix data entry errors in choice function
 
-*Version 2 (18/3/26)
+### Version 2.0 (2026-03-18)
 - Authentication
-- Authorization 
+- Authorization
 
-!Version 2.1 (19/3/26)
-- refactor: separate login flow and member features
+### Version 2.1 (2026-03-19)
+- Refactor login flow and member features
