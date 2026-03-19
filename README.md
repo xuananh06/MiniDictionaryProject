@@ -1,7 +1,7 @@
 # Mini Java Dictionary
 
-- A simple English-Vietnamese dictionary written in Java.
-/
+- Java-based Mini English-Vietnamese Dictionary.
+
 ## Technologies
 - Java 
 - OOP
