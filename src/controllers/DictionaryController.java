@@ -42,4 +42,11 @@ public class DictionaryController extends BaseController {
             System.out.println("Word not found.");
         }
     }
+
+    @AuthN
+    @AuthZ(roles = "admin")
+    public void deleteWord() {
+        
+    }
+
 }

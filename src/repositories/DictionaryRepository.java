@@ -4,9 +4,12 @@ import models.Word;
 
 import java.io.*;
 
+
 public class DictionaryRepository implements IDictionaryRepository {
 
     private final String FILE_PATH = "data/dictionary.txt";
+    
+
 
     @Override
     public void addWord(Word word) {
@@ -45,5 +48,10 @@ public class DictionaryRepository implements IDictionaryRepository {
         }
 
         return null;
+    }
+
+    @Override
+    public void deleteWord(String word) {
+        
     }
 }

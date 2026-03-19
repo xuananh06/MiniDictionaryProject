@@ -9,4 +9,7 @@ public interface IDictionaryRepository {
 
     //  find word, return null if not found 
     String findWord(String inputWord);
+
+    // delete word from dictionary
+    void deleteWord(String word);
 }

@@ -11,6 +11,7 @@ import services.DictionaryService;
 
 import java.util.Scanner;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -40,46 +41,65 @@ public class Main {
         boolean running = true;
 
         while (running) {
-            System.out.println();
-            System.out.println("===== DICTIONARY =====");
-            System.out.println("1. Login");
-            System.out.println("2. Add word");
-            System.out.println("3. Search word");
-            System.out.println("4. Logout");
-            System.out.println("0. Exit");
 
             if (Session.isLoggedIn()) {
+            
+                System.out.println();
+                System.out.println("===== DICTIONARY =====");
+               
+                System.out.println("1. Add word");
+                System.out.println("2. Search word");
+                System.out.println("3. Delete word");
+                System.out.println("4. Logout");
+                System.out.println("0. Exit");
+
                 System.out.println(">> Logged in as: " + Session.getCurrentUser());
-            } else {
-                System.out.println(">> Not logged in");
-            }
+            
 
-            System.out.print("Your choice:");
+                System.out.print("Your choice:");
 
-            String choice = scanner.nextLine().trim();
+                String choice = scanner.nextLine().trim();
 
 
-            switch (choice) {
-                case "1" : 
-                {
-                    System.out.print("Username: ");
-                    String username = scanner.nextLine().trim();
-                    System.out.print("Password: ");
-                    String password = scanner.nextLine().trim();
-                    authController.execute("login", username, password);
-                    break;
-                }
-                
-                case "2": dictionaryController.execute("addWord"); break;
-                case "3": dictionaryController.execute("searchWord"); break;
-                case "4": authController.execute("logout"); break;
-                case "0" : running = false; break;
-                
-                default  : System.out.println("Invalid choice!"); break;    
-            }         
+                switch (choice) {
+                    case "1": dictionaryController.execute("addWord"); break;      
+                    case "2": dictionaryController.execute("searchWord"); break;
+                    case "3": dictionaryController.execute("deleteWord"); break;
+                    case "4": authController.execute("logout"); break;
+                    case "0" : running = false; break;
+                    
+                    default  : System.out.println("Invalid choice!"); break;    
+            }   
         }
+            else {
+                System.out.println();
+                System.out.println("===== DICTIONARY =====");
+                System.out.println("1. Login");
+                System.out.println("0. Exit");
 
+                System.out.print("Your choice:");
+
+                String choice = scanner.nextLine().trim();
+
+                switch (choice) {
+                    case "1" : 
+                    {
+                        System.out.print("Username: ");
+                        String username = scanner.nextLine().trim();
+                        System.out.print("Password: ");
+                        String password = scanner.nextLine().trim();
+                        authController.execute("login", username, password);
+                        break;
+                    }
+                    
+                    case "0" : running = false; break;
+                    
+                    default  : System.out.println("Invalid choice!"); break;    
+                }
+            }
+        }
         System.out.println("Goodbye!");
         scanner.close();
-    }
+
+    }    
 }
