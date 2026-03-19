@@ -7,4 +7,5 @@ public interface IDictionaryService {
 
     String searchWord(String word);
     
+    void deleteWord(String word);
 }

@@ -24,4 +24,9 @@ public class DictionaryService implements IDictionaryService {
 
         return repository.findWord(word);
     }
+
+    @Override
+    public void deleteWord(String word) {
+        repository.deleteWord(word);
+    }
 }

@@ -46,7 +46,25 @@ public class DictionaryController extends BaseController {
     @AuthN
     @AuthZ(roles = "admin")
     public void deleteWord() {
-        
+        System.out.print("Enter word to delete: ");
+        String wordToDelete = scanner.nextLine();
+        if (wordToDelete == null) {
+            System.out.println("Invalid input.");
+            return;
+        }
+
+        wordToDelete = wordToDelete.trim();
+        if (wordToDelete.isEmpty()) {
+            System.out.println("Word cannot be empty.");
+            return;
+        }
+
+        // if (wordToDelete.contains("|")) {
+        //     System.out.println("Input cannot contain character '|'. Please re-enter.");
+        //     return;
+        // }
+
+        dictionaryService.deleteWord(wordToDelete);
     }
 
 }
