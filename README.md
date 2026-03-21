@@ -29,3 +29,7 @@ A CLI-based English-Vietnamese dictionary built with Java, featuring authenticat
 
 ### Version 2.1 (2026-03-19)
 - Refactor login flow and member features
+
+### Version 3
+- New feature: word suggestions
+- Fix: file format handling

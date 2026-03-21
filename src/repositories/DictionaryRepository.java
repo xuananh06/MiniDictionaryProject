@@ -1,8 +1,10 @@
 package repositories;
 
 import models.Word;
-
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DictionaryRepository implements IDictionaryRepository {
@@ -14,7 +16,8 @@ public class DictionaryRepository implements IDictionaryRepository {
     @Override
     public void addWord(Word word) {
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+        try (BufferedWriter bw = new BufferedWriter(
+                new OutputStreamWriter(new FileOutputStream(FILE_PATH, true), StandardCharsets.UTF_8))) {
 
             bw.write(word.getWord() + "|" + word.getMeaning());
             bw.newLine();
@@ -27,7 +30,8 @@ public class DictionaryRepository implements IDictionaryRepository {
     @Override
     public String findWord(String inputWord) {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
 
             String line;
 
@@ -51,6 +55,36 @@ public class DictionaryRepository implements IDictionaryRepository {
     }
 
     @Override
+    public List<String> suggestWords(String keyword) {
+        // Return unique words that contain the keyword (case-insensitive).
+        List<String> suggestions = new ArrayList<>();
+        String normalizedKeyword = keyword == null ? "" : keyword.trim().toLowerCase();
+        if (normalizedKeyword.isEmpty()) {
+            return suggestions;
+        }
+
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\\|");
+                if (parts.length < 2) {
+                    continue;
+                }
+
+                String word = parts[0].trim();
+                if (word.toLowerCase().contains(normalizedKeyword) && !suggestions.contains(word)) {
+                    suggestions.add(word);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("[DictionaryRepository] Failed to suggest words: " + e.getMessage());
+        }
+
+        return suggestions;
+    }
+
+    @Override
     public void deleteWord(String word) {
         File inputFile = new File(FILE_PATH);
         if (!inputFile.exists()) {
@@ -70,8 +104,10 @@ public class DictionaryRepository implements IDictionaryRepository {
 
         int removed = 0;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(inputFile));
-             BufferedWriter bw = new BufferedWriter(new FileWriter(tempFile))) {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8));
+             BufferedWriter bw = new BufferedWriter(
+                     new OutputStreamWriter(new FileOutputStream(tempFile), StandardCharsets.UTF_8))) {
 
             String line;
             while ((line = br.readLine()) != null) {

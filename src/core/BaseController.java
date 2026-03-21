@@ -7,18 +7,19 @@ import models.User;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-/**
+/*
      BaseController accessible by all Controllers, 
- * Tất cả Controller phải kế thừa từ lớp này.
+     All Controllers must inherit from this class.
  */
 public abstract class BaseController {
 
     /**
-     * Thực thi một action theo tên, tự động kiểm tra @AuthN và @AuthZ.
+     * Execute an action based on the name, automatically checking @AuthN and @AuthZ.
      *
-     * @param action tên method cần gọi
-     * @param args   tham số truyền vào method
+     * @param action the name of the method to call
+     * @param args   the arguments to pass to the method
      */
+
     public void execute(String action, Object... args) {
         try {
             Method method = findMethod(this.getClass(), action, args.length);
@@ -28,7 +29,7 @@ public abstract class BaseController {
                 return;
             }
 
-            // --- Kiểm tra Authentication (@AuthN) ---
+            // Check Authentication (@AuthN)
             if (method.isAnnotationPresent(AuthN.class)) {
                 if (!Session.isLoggedIn()) {
                     System.out.println("[AuthN] You are not logged in. Please login first!");
@@ -36,7 +37,7 @@ public abstract class BaseController {
                 }
             }
 
-            // --- Kiểm tra Authorization (@AuthZ - RBAC) ---
+            // Check Authorization (@AuthZ - RBAC)
             if (method.isAnnotationPresent(AuthZ.class)) {
                 AuthZ authZ = method.getAnnotation(AuthZ.class);
                 String[] allowedRoles = authZ.roles().split("\\|");
@@ -51,7 +52,7 @@ public abstract class BaseController {
                 }
             }
 
-            // --- Thực thi method ---
+            // Execute method 
             method.invoke(this, args);
 
         } catch (Exception e) {

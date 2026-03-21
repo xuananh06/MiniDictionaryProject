@@ -1,6 +1,7 @@
 package repositories;
 
 import models.Word;
+import java.util.List;
 
 public interface IDictionaryRepository {
 
@@ -9,6 +10,9 @@ public interface IDictionaryRepository {
 
     //  find word, return null if not found 
     String findWord(String inputWord);
+
+    // suggest words by partial keyword
+    List<String> suggestWords(String keyword);
 
     // delete word from dictionary
     void deleteWord(String word);

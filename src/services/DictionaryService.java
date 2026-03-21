@@ -1,8 +1,8 @@
 package services;
 
 import models.Word;
-
 import repositories.IDictionaryRepository;
+import java.util.List;
 
 public class DictionaryService implements IDictionaryService {
 
@@ -23,6 +23,11 @@ public class DictionaryService implements IDictionaryService {
     public String searchWord(String word) {
 
         return repository.findWord(word);
+    }
+
+    @Override
+    public List<String> suggestWords(String keyword) {
+        return repository.suggestWords(keyword);
     }
 
     @Override

@@ -3,8 +3,10 @@ package repositories;
 import models.User;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,7 +27,8 @@ public class UserRepositoryImpl implements IUserRepository {
     }
 
     private void loadUsers() {
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(
+                new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8))) {
             String line;
             while ((line = br.readLine()) != null) {
                 line = line.trim(); //delete leading/trailing whitespace

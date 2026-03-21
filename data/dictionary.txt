@@ -1,2 +1,2 @@
 cat|meomeo
-ngo xuan anh|dep trai so 1
+ngo xuan anh| class SpecPerson
